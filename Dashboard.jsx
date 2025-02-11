@@ -11,7 +11,6 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const user = JSON.parse(sessionStorage.getItem("user"));
   const staff_id = user?.staff_id;
-// Retrieve stored staff_id
 
   useEffect(() => {
     if (!staff_id) {
@@ -20,7 +19,6 @@ const Dashboard = () => {
       return;
     }
 
-    // Fetch Data with staff_id Query
     axios.get(`http://localhost:5000/api/getIATDetails?staff_id=${staff_id}`)
       .then((response) => setIatData(response.data))
       .catch((error) => console.error("Error fetching IAT Marks:", error));
@@ -41,19 +39,39 @@ const Dashboard = () => {
 
   return (
     <div style={{ padding: "20px", textAlign: "center" }}>
-      <h2 style={{ color: "#FCFFE7", marginTop: "20px" }}>IAT MARKS</h2>
-      <TableSection data={iatData} totalKey="total_iat" />
-
-      <h2 style={{ color: "#FCFFE7", marginTop: "20px" }}>UNIVERSITY MARKS</h2>
-      <TableSection data={universityData} totalKey="total_univ" />
-
-      <h2 style={{ color: "#FCFFE7", marginTop: "20px" }}>FEEDBACK MARKS</h2>
-      <TableSection data={feedbackData} totalKey="total_feed" />
+      <Section title="IAT MARKS" data={iatData} totalKey="total_iat" navigate={navigate} reportType="iat" />
+      <Section title="UNIVERSITY MARKS" data={universityData} totalKey="total_univ" navigate={navigate} reportType="university" />
+      <Section title="FEEDBACK MARKS" data={feedbackData} totalKey="total_feed" navigate={navigate} reportType="feedback" />
     </div>
   );
 };
 
-// Table Section (Supports Multiple Rows)
+const Section = ({ title, data, totalKey, navigate, reportType }) => (
+  <div>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <h2 style={{ color: "#FCFFE7", marginTop: "20px" }}>{title}</h2>
+      <button
+        onClick={() => navigate(`/report?table=${reportType}`)}
+        style={{
+          width: "25%",
+          padding: "12px",
+          fontSize: "20px",
+          background: "#FCFFE7",
+          color: "#2B3467",
+          border: "none",
+          cursor: "pointer",
+          borderRadius: "5px",
+          fontWeight: "bold",
+          marginBottom: "20px",
+        }}
+      >
+        Go to {title} Report
+      </button>
+    </div>
+    <TableSection data={data} totalKey={totalKey} />
+  </div>
+);
+
 const TableSection = ({ data, totalKey }) => (
   <table width="95%" style={{ color: "#FCFFE7", margin: "auto", borderCollapse: "collapse", textAlign: "center", fontSize: "22px", border: "3px solid black" }}>
     <thead>
