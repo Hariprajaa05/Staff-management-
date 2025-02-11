@@ -62,6 +62,7 @@ const StaffSchema = new mongoose.Schema(
 const FeedbackSchema = new mongoose.Schema(
   {
     staff_name: String,
+    staff_id:Number,
     year: Number,
     total_feed: Number,
   },
@@ -71,6 +72,7 @@ const FeedbackSchema = new mongoose.Schema(
 const UniversitySchema = new mongoose.Schema(
   {
     staff_name: String,
+    staff_id:Number,
     year: Number,
     total_univ: Number,
   },
@@ -80,6 +82,7 @@ const UniversitySchema = new mongoose.Schema(
 const IATSchema = new mongoose.Schema(
   {
     staff_name: String,
+    staff_id:Number,
     year: Number,
     total_iat: Number,
   },
@@ -106,7 +109,13 @@ app.post("/login", async (req, res) => {
       return res.status(401).json({ success: false, message: "Invalid User ID or Password" });
     }
 
-    // Proceed normally...
+    const user = users[0];
+    res.status(200).json({
+      success: true,
+      designation: user.designation,
+      redirectPage: user.designation === "JA" ? "japage" : "dashboard",
+      user: user,
+    });
   } catch (error) {
     console.error("Login Error:", error);
     res.status(500).json({ success: false, message: "Server Error" });
