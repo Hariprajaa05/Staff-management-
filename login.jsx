@@ -18,25 +18,27 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     let newErrors = {
       user_id: formData.user_id.trim() === "",
       password: formData.password.trim() === "",
     };
     setErrors(newErrors);
-
+  
     if (!newErrors.user_id && !newErrors.password) {
       try {
         const response = await axios.post("http://localhost:5000/login", formData);
-
+  
         if (response.data.success) {
           setMessage("Login successful!");
-
+  
           const { designation, redirectPage, user } = response.data;
-
+  
           // Store user data in sessionStorage
           sessionStorage.setItem("user", JSON.stringify(user));
-
+  
+          console.log("Navigating to:", designation === "JA" ? "/japage" : `/${redirectPage || "dashboard"}`);
+  
           if (designation === "JA") {
             navigate("/japage");
           } else {
