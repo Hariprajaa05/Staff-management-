@@ -175,6 +175,19 @@ app.get("/api/getUniversityDetails", async (req, res) => {
     res.status(500).json({ error: "Server Error" });
   }
 });
+// Fetch FEEDBACK Data (Uses FEEDBACK DB)
+app.get("/api/getFeedbackDetails", async (req, res) => {
+  const { staff_id } = req.query;
+  if (!staff_id) return res.status(400).json({ error: "Staff ID is required" });
+
+  try {
+    const feedbackDetails = await Feedback.find({ staff_id });
+    res.json(feedbackDetails);
+  } catch (error) {
+    console.error("Fetch FEEDBACK Error:", error);
+    res.status(500).json({ error: "Server Error" });
+  }
+});
 
 
 
