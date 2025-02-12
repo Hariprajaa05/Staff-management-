@@ -103,6 +103,7 @@ const Table = ({ title, includeSubColumns }) => {
               <th style={{ border: "3px solid #000", padding: "15px" }}>IAT1</th>
               <th style={{ border: "3px solid #000", padding: "15px" }}>IAT2</th>
               <th style={{ border: "3px solid #000", padding: "15px" }}>Avg_p2</th>
+              {/* Removed the repeated "Total Average" and "Final Score" columns here */}
             </tr>
           )}
         </thead>
