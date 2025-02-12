@@ -33,27 +33,20 @@ const Report = () => {
         </button>
         <br />
 
-        {table === "iat" && (
-          <Table title="Table 1 - IAT SCORE" includeSubColumns={true} />
-        )}
-
-        {table === "university" && (
-          <Table title="Table 2 - UNIVERSITY SCORE" includeSubColumns={false} />
-        )}
-
-        {table === "feedback" && (
-          <Table title="Table 3 - FEEDBACK SCORE" includeSubColumns={false} />
-        )}
+        {/* Render the appropriate table based on the `table` query parameter */}
+        {table === "iat" && <IATTable />}
+        {table === "university" && <UniversityTable />}
+        {table === "feedback" && <FeedbackTable />}
       </div>
     </div>
   );
 };
 
-// Table Component
-const Table = ({ title, includeSubColumns }) => {
+// IAT Table Component
+const IATTable = () => {
   return (
     <>
-      <h3 style={{ color: "#FCFFE7", textAlign: "center", fontSize: "20px", marginBottom: "10px" }}>{title}</h3>
+      <h3 style={{ color: "#FCFFE7", textAlign: "center", fontSize: "20px", marginBottom: "10px" }}>Table 1 - IAT SCORE</h3>
       <table
         width="100%"
         style={{
@@ -70,81 +63,140 @@ const Table = ({ title, includeSubColumns }) => {
             <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "5%" }}>S.No</th>
             <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "15%" }}>Name</th>
             <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Semester</th>
-
-            {/* Conditional Column Headers */}
-            {includeSubColumns ? (
-              <>
-                <th colSpan="3" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 1</th>
-                <th colSpan="3" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 2</th>
-              </>
-            ) : (
-              <>
-                <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 1</th>
-                <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 2</th>
-              </>
-            )}
-
-            {/* Total Average FIXED (Same as Final Score) */}
+            <th colSpan="3" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 1</th>
+            <th colSpan="3" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 2</th>
             <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Total Average</th>
-
             <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Final Score</th>
           </tr>
-
-          {includeSubColumns && (
-            <tr style={{ background: "#2B3467", color: "white", height: "50px", borderBottom: "3px solid #000" }}>
-              <th style={{ border: "3px solid #000", padding: "15px" }}>IAT1</th>
-              <th style={{ border: "3px solid #000", padding: "15px" }}>IAT2</th>
-              <th style={{ border: "3px solid #000", padding: "15px" }}>Avg_p1</th>
-              <th style={{ border: "3px solid #000", padding: "15px" }}>IAT1</th>
-              <th style={{ border: "3px solid #000", padding: "15px" }}>IAT2</th>
-              <th style={{ border: "3px solid #000", padding: "15px" }}>Avg_p2</th>
-            </tr>
-          )}
+          <tr style={{ background: "#2B3467", color: "white", height: "50px", borderBottom: "3px solid #000" }}>
+            <th style={{ border: "3px solid #000", padding: "15px" }}>IAT1</th>
+            <th style={{ border: "3px solid #000", padding: "15px" }}>IAT2</th>
+            <th style={{ border: "3px solid #000", padding: "15px" }}>Avg_p1</th>
+            <th style={{ border: "3px solid #000", padding: "15px" }}>IAT1</th>
+            <th style={{ border: "3px solid #000", padding: "15px" }}>IAT2</th>
+            <th style={{ border: "3px solid #000", padding: "15px" }}>Avg_p2</th>
+          </tr>
         </thead>
         <tbody>
           <tr style={{ height: "50px", borderBottom: "3px solid #000" }}>
             <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>1</td>
             <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}></td>
             <td style={{ border: "3px solid #000", padding: "15px" }}>Odd</td>
-
-            {includeSubColumns ? (
-              <>
-                <td style={{ border: "3px solid #000", padding: "15px" }}></td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}></td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}></td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}></td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}></td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}></td>
-              </>
-            ) : (
-              <>
-                <td style={{ border: "3px solid #000", padding: "15px" }}></td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}></td>
-              </>
-            )}
-
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
             <td style={{ border: "3px solid #000", padding: "15px" }}></td>
             <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}></td>
           </tr>
           <tr style={{ height: "50px", borderBottom: "3px solid #000" }}>
             <td style={{ border: "3px solid #000", padding: "15px" }}>Even</td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+          </tr>
+        </tbody>
+      </table>
+    </>
+  );
+};
 
-            {includeSubColumns ? (
-              <>
-                <td style={{ border: "3px solid #000", padding: "15px" }}></td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}></td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}></td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}></td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}></td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}></td>
-              </>
-            ) : (
-              <>
-                <td style={{ border: "3px solid #000", padding: "15px" }}></td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}></td>
-              </>
-            )}
+// University Table Component
+const UniversityTable = () => {
+  return (
+    <>
+      <h3 style={{ color: "#FCFFE7", textAlign: "center", fontSize: "20px", marginBottom: "10px" }}>Table 2 - UNIVERSITY SCORE</h3>
+      <table
+        width="100%"
+        style={{
+          color: "#FCFFE7",
+          textAlign: "center",
+          fontSize: "20px",
+          borderCollapse: "collapse",
+          border: "3px solid #000",
+          tableLayout: "fixed",
+        }}
+      >
+        <thead>
+          <tr style={{ background: "#2B3467", color: "white", height: "60px", borderBottom: "3px solid #000" }}>
+            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "5%" }}>S.No</th>
+            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "15%" }}>Name</th>
+            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Semester</th>
+            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 1</th>
+            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 2</th>
+            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Total Average</th>
+            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Final Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style={{ height: "50px", borderBottom: "3px solid #000" }}>
+            <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>1</td>
+            <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}></td>
+          </tr>
+          <tr style={{ height: "50px", borderBottom: "3px solid #000" }}>
+            <td style={{ border: "3px solid #000", padding: "15px" }}>Even</td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+          </tr>
+        </tbody>
+      </table>
+    </>
+  );
+};
 
+// Feedback Table Component
+const FeedbackTable = () => {
+  return (
+    <>
+      <h3 style={{ color: "#FCFFE7", textAlign: "center", fontSize: "20px", marginBottom: "10px" }}>Table 3 - FEEDBACK SCORE</h3>
+      <table
+        width="100%"
+        style={{
+          color: "#FCFFE7",
+          textAlign: "center",
+          fontSize: "20px",
+          borderCollapse: "collapse",
+          border: "3px solid #000",
+          tableLayout: "fixed",
+        }}
+      >
+        <thead>
+          <tr style={{ background: "#2B3467", color: "white", height: "60px", borderBottom: "3px solid #000" }}>
+            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "5%" }}>S.No</th>
+            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "15%" }}>Name</th>
+            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Semester</th>
+            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 1</th>
+            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 2</th>
+            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Total Average</th>
+            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Final Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style={{ height: "50px", borderBottom: "3px solid #000" }}>
+            <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>1</td>
+            <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}>Odd</td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}></td>
+          </tr>
+          <tr style={{ height: "50px", borderBottom: "3px solid #000" }}>
+            <td style={{ border: "3px solid #000", padding: "15px" }}>Even</td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
             <td style={{ border: "3px solid #000", padding: "15px" }}></td>
           </tr>
         </tbody>
