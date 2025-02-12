@@ -61,33 +61,56 @@ const StaffSchema = new mongoose.Schema(
 
 const FeedbackSchema = new mongoose.Schema(
   {
-    staff_name: String,
-    staff_id:Number,
-    year: Number,
+    dept: String,
+    odd_paper: [Number],
+    even_paper: [Number],
+    avg: [Number],
+    total_avg: [Number],
     total_feed: Number,
+    staff_id: Number,
+    staff_name: String,
+    year: Number
   },
   { collection: "cse" }
 );
+
+module.exports = mongoose.model("Feedback", FeedbackSchema);
+
 
 const UniversitySchema = new mongoose.Schema(
   {
-    staff_name: String,
-    staff_id:Number,
-    year: Number,
+    dept: String,
+    odd_paper: [Number],
+    even_paper: [Number],
+    total_avg: [Number],
     total_univ: Number,
+    staff_id: Number,
+    staff_name: String,
+    year: Number
   },
   { collection: "cse" }
 );
 
+module.exports = mongoose.model("University", UniversitySchema);
+
+
 const IATSchema = new mongoose.Schema(
   {
-    staff_name: String,
-    staff_id:Number,
-    year: Number,
+    dept: String,
+    odd_paper: [Number],
+    even_paper: [Number],
+    avg: [Number],
+    total_avg: [Number],
     total_iat: Number,
+    staff_id: Number,
+    staff_name: String,
+    year: Number
   },
   { collection: "cse" }
 );
+
+module.exports = mongoose.model("IAT", IATSchema);
+
 
 // Create Models using Different Connections
 const Staff = stafConnection.model("Staff", StaffSchema);
@@ -153,20 +176,6 @@ app.get("/api/getUniversityDetails", async (req, res) => {
   }
 });
 
-
-// Fetch FEEDBACK Data (Uses FEEDBACK DB)
-app.get("/api/getFeedbackDetails", async (req, res) => {
-  const { staff_id } = req.query;
-  if (!staff_id) return res.status(400).json({ error: "Staff ID is required" });
-
-  try {
-    const feedbackDetails = await Feedback.find({ staff_id });
-    res.json(feedbackDetails);
-  } catch (error) {
-    console.error("Fetch FEEDBACK Error:", error);
-    res.status(500).json({ error: "Server Error" });
-  }
-});
 
 
 // Start Server
