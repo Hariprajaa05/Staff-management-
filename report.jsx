@@ -138,7 +138,7 @@ const UniversityTable = () => {
           <tr style={{ height: "50px", borderBottom: "3px solid #000" }}>
             <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>1</td>
             <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}></td>
-            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}>Odd</td>
             <td style={{ border: "3px solid #000", padding: "15px" }}></td>
             <td style={{ border: "3px solid #000", padding: "15px" }}></td>
             <td style={{ border: "3px solid #000", padding: "15px" }}></td>
