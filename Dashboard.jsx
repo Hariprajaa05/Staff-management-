@@ -9,28 +9,41 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
-  const user = JSON.parse(sessionStorage.getItem("user"));
+
+  // Retrieve session data
+  const storedUser = sessionStorage.getItem("user");
+  console.log("Session Storage Data:", storedUser); // Debugging
+
+  const user = storedUser ? JSON.parse(storedUser) : null;
   const staff_id = user?.staff_id;
 
   useEffect(() => {
     if (!staff_id) {
+      console.error("User not logged in or staff_id missing!");
       alert("User not logged in!");
       navigate("/");
       return;
     }
 
-    axios.get(`http://localhost:5000/api/getIATDetails?staff_id=${staff_id}`)
-      .then((response) => setIatData(response.data))
-      .catch((error) => console.error("Error fetching IAT Marks:", error));
+    const fetchData = async () => {
+      try {
+        const [iatRes, univRes, feedbackRes] = await Promise.all([
+          axios.get(`http://localhost:5000/api/getIATDetails?staff_id=${staff_id}`),
+          axios.get(`http://localhost:5000/api/getUniversityDetails?staff_id=${staff_id}`),
+          axios.get(`http://localhost:5000/api/getFeedbackDetails?staff_id=${staff_id}`)
+        ]);
 
-    axios.get(`http://localhost:5000/api/getUniversityDetails?staff_id=${staff_id}`)
-      .then((response) => setUniversityData(response.data))
-      .catch((error) => console.error("Error fetching University Marks:", error));
+        setIatData(iatRes.data);
+        setUniversityData(univRes.data);
+        setFeedbackData(feedbackRes.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    axios.get(`http://localhost:5000/api/getFeedbackDetails?staff_id=${staff_id}`)
-      .then((response) => setFeedbackData(response.data))
-      .catch((error) => console.error("Error fetching Feedback Marks:", error))
-      .finally(() => setLoading(false));
+    fetchData();
   }, [staff_id, navigate]);
 
   if (loading) {
@@ -39,19 +52,19 @@ const Dashboard = () => {
 
   return (
     <div style={{ padding: "20px", textAlign: "center" }}>
-      <Section title="IAT MARKS" data={iatData} totalKey="total_iat" navigate={navigate} reportType="iat" />
-      <Section title="UNIVERSITY MARKS" data={universityData} totalKey="total_univ" navigate={navigate} reportType="university" />
-      <Section title="FEEDBACK MARKS" data={feedbackData} totalKey="total_feed" navigate={navigate} reportType="feedback" />
+      <Section title="IAT MARKS" data={iatData} totalKey="total_iat" staff_id={staff_id} navigate={navigate} reportType="iat" />
+      <Section title="UNIVERSITY MARKS" data={universityData} totalKey="total_univ" staff_id={staff_id} navigate={navigate} reportType="university" />
+      <Section title="FEEDBACK MARKS" data={feedbackData} totalKey="total_feed" staff_id={staff_id} navigate={navigate} reportType="feedback" />
     </div>
   );
 };
 
-const Section = ({ title, data, totalKey, navigate, reportType }) => (
+const Section = ({ title, data, totalKey, staff_id, navigate, reportType }) => (
   <div>
     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
       <h2 style={{ color: "#FCFFE7", marginTop: "20px" }}>{title}</h2>
       <button
-        onClick={() => navigate(`/report?table=${reportType}`)}
+        onClick={() => navigate(`/report?table=${reportType}&staff_id=${staff_id}`)}
         style={{
           width: "25%",
           padding: "12px",
