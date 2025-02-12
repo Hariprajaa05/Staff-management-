@@ -4,11 +4,13 @@ import { useSearchParams } from "react-router-dom";
 const Report = () => {
   const [searchParams] = useSearchParams();
   const table = searchParams.get("table");
+  const staff_id = searchParams.get("staff_id");
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "50px", padding: "20px" }}>
       <div style={{ width: "80%" }}>
         <h2 style={{ color: "#FCFFE7", textAlign: "center", fontSize: "24px" }}>Detailed Report</h2>
+        <p style={{ color: "#FCFFE7", textAlign: "center", fontSize: "18px" }}>Staff ID: {staff_id}</p>
 
         <button
           style={{
@@ -16,7 +18,7 @@ const Report = () => {
             padding: "12px",
             background: "#2B3467",
             color: "white",
-            border: "none", 
+            border: "none",
             cursor: "pointer",
             fontSize: "18px",
             fontWeight: "bold",
@@ -32,24 +34,15 @@ const Report = () => {
         <br />
 
         {table === "iat" && (
-          <Table
-            title="Table 1 - IAT SCORE"
-            includeSubColumns={true}
-          />
+          <Table title="Table 1 - IAT SCORE" includeSubColumns={true} />
         )}
 
         {table === "university" && (
-          <Table
-            title="Table 2 - UNIVERSITY SCORE"
-            includeSubColumns={false}
-          />
+          <Table title="Table 2 - UNIVERSITY SCORE" includeSubColumns={false} />
         )}
 
         {table === "feedback" && (
-          <Table
-            title="Table 3 - FEEDBACK SCORE"
-            includeSubColumns={false}
-          />
+          <Table title="Table 3 - FEEDBACK SCORE" includeSubColumns={false} />
         )}
       </div>
     </div>
@@ -77,7 +70,7 @@ const Table = ({ title, includeSubColumns }) => {
             <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "5%" }}>S.No</th>
             <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "15%" }}>Name</th>
             <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Semester</th>
-            
+
             {/* Conditional Column Headers */}
             {includeSubColumns ? (
               <>
@@ -91,7 +84,9 @@ const Table = ({ title, includeSubColumns }) => {
               </>
             )}
 
+            {/* Total Average FIXED (Same as Final Score) */}
             <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Total Average</th>
+
             <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Final Score</th>
           </tr>
 
@@ -103,7 +98,6 @@ const Table = ({ title, includeSubColumns }) => {
               <th style={{ border: "3px solid #000", padding: "15px" }}>IAT1</th>
               <th style={{ border: "3px solid #000", padding: "15px" }}>IAT2</th>
               <th style={{ border: "3px solid #000", padding: "15px" }}>Avg_p2</th>
-              {/* Removed the repeated "Total Average" and "Final Score" columns here */}
             </tr>
           )}
         </thead>
@@ -113,7 +107,6 @@ const Table = ({ title, includeSubColumns }) => {
             <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}></td>
             <td style={{ border: "3px solid #000", padding: "15px" }}>Odd</td>
 
-            {/* Conditional Table Cells */}
             {includeSubColumns ? (
               <>
                 <td style={{ border: "3px solid #000", padding: "15px" }}></td>
@@ -130,13 +123,12 @@ const Table = ({ title, includeSubColumns }) => {
               </>
             )}
 
-            <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}></td>
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
             <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}></td>
           </tr>
           <tr style={{ height: "50px", borderBottom: "3px solid #000" }}>
             <td style={{ border: "3px solid #000", padding: "15px" }}>Even</td>
 
-            {/* Conditional Table Cells */}
             {includeSubColumns ? (
               <>
                 <td style={{ border: "3px solid #000", padding: "15px" }}></td>
@@ -152,6 +144,8 @@ const Table = ({ title, includeSubColumns }) => {
                 <td style={{ border: "3px solid #000", padding: "15px" }}></td>
               </>
             )}
+
+            <td style={{ border: "3px solid #000", padding: "15px" }}></td>
           </tr>
         </tbody>
       </table>
