@@ -31,16 +31,13 @@ const Login = () => {
   
         if (response.data.success) {
           setMessage("Login successful!");
-  
           const { designation, redirectPage, user } = response.data;
   
-          // Store user data in sessionStorage
+          // Store user data
           sessionStorage.setItem("user", JSON.stringify(user));
   
-          console.log("Navigating to:", designation === "JA" ? "/japage" : `/${redirectPage || "dashboard"}`);
-  
           if (designation === "JA") {
-            navigate("/japage");
+            window.location.href = "http://127.0.0.1:5000"; // Redirects outside React
           } else {
             navigate(`/${redirectPage || "dashboard"}`);
           }
@@ -48,14 +45,12 @@ const Login = () => {
           setMessage("Invalid User ID or Password.");
         }
       } catch (error) {
-        if (error.response?.data?.message) {
-          setMessage(error.response.data.message);
-        } else {
-          setMessage("Server error, please try again later.");
-        }
+        setMessage(error.response?.data?.message || "Server error, please try again.");
       }
     }
   };
+  
+  
 
   return (
     <div className="login-container">
