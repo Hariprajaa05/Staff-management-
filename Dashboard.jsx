@@ -54,7 +54,7 @@ const Dashboard = () => {
     <div style={{ padding: "20px", textAlign: "center" }}>
       <Section title="IAT MARKS" data={iatData} totalKey="total_iat" staff_id={staff_id} navigate={navigate} reportType="iat" />
       <Section title="UNIVERSITY MARKS" data={universityData} totalKey="total_univ" staff_id={staff_id} navigate={navigate} reportType="university" />
-      <Section title="FEEDBACK MARKS" data={feedbackData} totalKey="total_feed" staff_id={staff_id} navigate={navigate} reportType="feedback" />
+      <Section title="FEEDBACK MARKS" data={feedbackData} totalKey="total_feedback" staff_id={staff_id} navigate={navigate} reportType="feedback" />
     </div>
   );
 };
