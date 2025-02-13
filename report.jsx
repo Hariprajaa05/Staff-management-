@@ -129,7 +129,8 @@ const IATTable = ({ data }) => {
         <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper?.[3] ?? "-"}</td>
         <td style={{ border: "3px solid #000", padding: "15px" }}>{row.avg?.[3] ?? "-"}</td>
         <td style={{ border: "3px solid #000", padding: "15px" }}>{row.total_avg?.[1] ?? "-"}</td>
-        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.total_avg?.[1] ?? "-"}</td>
+
+        
       </tr>
     </React.Fragment>
   ))}
@@ -192,7 +193,7 @@ const UniversityTable = ({ data }) => {
         <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper?.[0] ?? "-"}</td>
         <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper?.[1] ?? "-"}</td>
         <td style={{ border: "3px solid #000", padding: "15px" }}>{row.total_avg?.[1] ?? "-"}</td>
-        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.total_univ}</td>
+
       </tr>
     </React.Fragment>
   ))}
@@ -252,7 +253,7 @@ const FeedbackTable = ({ data }) => {
                 <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper?.[0] ?? "-"}</td>
                 <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper?.[1] ?? "-"}</td>
                 <td style={{ border: "3px solid #000", padding: "15px" }}>{row.total_avg?.[1] ?? "-"}</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.total_feed}</td>
+
               </tr>
             </React.Fragment>
           ))}
