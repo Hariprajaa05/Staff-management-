@@ -244,7 +244,7 @@ const FeedbackTable = ({ data }) => {
                 <td style={{ border: "3px solid #000", padding: "15px" }}>{row.odd_paper?.[0] ?? "-"}</td>
                 <td style={{ border: "3px solid #000", padding: "15px" }}>{row.odd_paper?.[1] ?? "-"}</td>
                 <td style={{ border: "3px solid #000", padding: "15px" }}>{row.total_avg?.[0] ?? "-"}</td>
-                <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px", verticalAlign: "middle" }}>{row.total_feed}</td>
+                <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px", verticalAlign: "middle" }}>{row.total_feedback}</td>
               </tr>
 
               {/* Even Semester Row */}
