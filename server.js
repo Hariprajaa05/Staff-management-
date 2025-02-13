@@ -47,7 +47,7 @@ feedbackConnection.once("open", () => console.log("Connected to FEEDBACK DB"));
 universityConnection.once("open", () => console.log("Connected to UNIVERSITY DB"));
 iatConnection.once("open", () => console.log("Connected to IAT DB"));
 
-// Define Schemas & Models for Each DB
+// Define Schemas
 const StaffSchema = new mongoose.Schema(
   {
     staff_name: String,
@@ -66,16 +66,13 @@ const FeedbackSchema = new mongoose.Schema(
     even_paper: [Number],
     avg: [Number],
     total_avg: [Number],
-    total_feed: Number,
+    total_feedback: Number,
     staff_id: Number,
     staff_name: String,
-    year: Number
+    year: Number,
   },
   { collection: "cse" }
 );
-
-module.exports = mongoose.model("Feedback", FeedbackSchema);
-
 
 const UniversitySchema = new mongoose.Schema(
   {
@@ -86,13 +83,10 @@ const UniversitySchema = new mongoose.Schema(
     total_univ: Number,
     staff_id: Number,
     staff_name: String,
-    year: Number
+    year: Number,
   },
   { collection: "cse" }
 );
-
-module.exports = mongoose.model("University", UniversitySchema);
-
 
 const IATSchema = new mongoose.Schema(
   {
@@ -104,39 +98,34 @@ const IATSchema = new mongoose.Schema(
     total_iat: Number,
     staff_id: Number,
     staff_name: String,
-    year: Number
+    year: Number,
   },
   { collection: "cse" }
 );
 
-module.exports = mongoose.model("IAT", IATSchema);
-
-
 // Create Models using Different Connections
 const Staff = stafConnection.model("Staff", StaffSchema);
-const Feedback = feedbackConnection.model("FEEDBACK", FeedbackSchema);
-const University = universityConnection.model("UNIVERSITY", UniversitySchema);
+const Feedback = feedbackConnection.model("Feedback", FeedbackSchema);
+const University = universityConnection.model("University", UniversitySchema);
 const IAT = iatConnection.model("IAT", IATSchema);
 
-// Login API - Retrieves user data from all three databases
+// Login API - Retrieves user data from the database
 app.post("/login", async (req, res) => {
   const { user_id, password } = req.body;
   console.log("Login attempt for:", user_id);
 
   try {
-    const users = await Staff.find({ staff_id: user_id, pass: password });
-    console.log("User Found:", users);
+    const user = await Staff.findOne({ staff_id: user_id, pass: password });
 
-    if (users.length === 0) {
+    if (!user) {
       console.log("User Not Found");
       return res.status(401).json({ success: false, message: "Invalid User ID or Password" });
     }
 
-    const user = users[0];
     res.status(200).json({
       success: true,
       designation: user.designation,
-      redirectPage: user.designation === "JA" ? "japage" : "dashboard",
+      redirectPage: user.designation === "JA" ? "http://127.0.0.1:5000" : "dashboard",
       user: user,
     });
   } catch (error) {
@@ -144,8 +133,6 @@ app.post("/login", async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 });
-
-
 
 // Fetch IAT Data (Uses IAT DB)
 app.get("/api/getIATDetails", async (req, res) => {
@@ -161,7 +148,6 @@ app.get("/api/getIATDetails", async (req, res) => {
   }
 });
 
-
 // Fetch UNIVERSITY Data (Uses UNIVERSITY DB)
 app.get("/api/getUniversityDetails", async (req, res) => {
   const { staff_id } = req.query;
@@ -175,6 +161,7 @@ app.get("/api/getUniversityDetails", async (req, res) => {
     res.status(500).json({ error: "Server Error" });
   }
 });
+
 // Fetch FEEDBACK Data (Uses FEEDBACK DB)
 app.get("/api/getFeedbackDetails", async (req, res) => {
   const { staff_id } = req.query;
@@ -188,8 +175,6 @@ app.get("/api/getFeedbackDetails", async (req, res) => {
     res.status(500).json({ error: "Server Error" });
   }
 });
-
-
 
 // Start Server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
