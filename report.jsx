@@ -83,52 +83,60 @@ const IATTable = ({ data }) => {
         }}
       >
         <thead>
-          <tr style={{ background: "#2B3467", color: "white", height: "60px", borderBottom: "3px solid #000" }}>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "5%" }}>S.No</th>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "15%" }}>Name</th>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Semester</th>
-            <th colSpan="3" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 1</th>
-            <th colSpan="3" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 2</th>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Total Average</th>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Final Score</th>
-          </tr>
-          <tr style={{ background: "#2B3467", color: "white", height: "50px", borderBottom: "3px solid #000" }}>
-            <th style={{ border: "3px solid #000", padding: "15px" }}>IAT1</th>
-            <th style={{ border: "3px solid #000", padding: "15px" }}>IAT2</th>
-            <th style={{ border: "3px solid #000", padding: "15px" }}>Avg_p1</th>
-            <th style={{ border: "3px solid #000", padding: "15px" }}>IAT1</th>
-            <th style={{ border: "3px solid #000", padding: "15px" }}>IAT2</th>
-            <th style={{ border: "3px solid #000", padding: "15px" }}>Avg_p2</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row, index) => (
-            <React.Fragment key={index}>
-              <tr style={{ height: "50px", borderBottom: "3px solid #000" }}>
-                <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>{index + 1}</td>
-                <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>{row.staff_name}</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>Odd</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.odd_paper[0]}</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.odd_paper[1]}</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.avg[0]}</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.odd_paper[2]}</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.odd_paper[3]}</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.avg[1]}</td>
-                <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>{row.total_avg[0]}</td>
-                <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>{row.total_iat}</td>
-              </tr>
-              <tr style={{ height: "50px", borderBottom: "3px solid #000" }}>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>Even</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper[0]}</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper[1]}</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.avg[2]}</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper[2]}</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper[3]}</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.avg[3]}</td>
-              </tr>
-            </React.Fragment>
-          ))}
-        </tbody>
+  <tr style={{ background: "#2B3467", color: "white", height: "60px", borderBottom: "3px solid #000" }}>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "5%" }}>S.No</th>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "15%" }}>Name</th>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Semester</th>
+    <th colSpan="3" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 1</th>
+    <th colSpan="3" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 2</th>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Total Average</th>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Final Score</th>
+  </tr>
+  <tr style={{ background: "#2B3467", color: "white", height: "50px", borderBottom: "3px solid #000" }}>
+    <th style={{ border: "3px solid #000", padding: "15px" }}>IAT1</th>
+    <th style={{ border: "3px solid #000", padding: "15px" }}>IAT2</th>
+    <th style={{ border: "3px solid #000", padding: "15px" }}>Avg_p1</th>
+    <th style={{ border: "3px solid #000", padding: "15px" }}>IAT1</th>
+    <th style={{ border: "3px solid #000", padding: "15px" }}>IAT2</th>
+    <th style={{ border: "3px solid #000", padding: "15px" }}>Avg_p2</th>
+  </tr>
+</thead>
+<tbody>
+  {data.map((row, index) => (
+    <React.Fragment key={index}>
+      {/* Odd Semester Row */}
+      <tr style={{ height: "50px", borderBottom: "3px solid #000" }}>
+        <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>{index + 1}</td>
+        <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>{row.staff_name}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>Odd</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.odd_paper?.[0] ?? "-"}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.odd_paper?.[1] ?? "-"}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.avg?.[0] ?? "-"}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.odd_paper?.[2] ?? "-"}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.odd_paper?.[3] ?? "-"}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.avg?.[1] ?? "-"}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.total_avg?.[0] ?? "-"}</td>
+        <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px", verticalAlign: "middle" }}>{row.total_iat}</td>
+      </tr>
+
+      {/* Even Semester Row */}
+      <tr style={{ height: "50px", borderBottom: "3px solid #000" }}>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>Even</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper?.[0] ?? "-"}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper?.[1] ?? "-"}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.avg?.[2] ?? "-"}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper?.[2] ?? "-"}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper?.[3] ?? "-"}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.avg?.[3] ?? "-"}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.total_avg?.[1] ?? "-"}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.total_avg?.[1] ?? "-"}</td>
+      </tr>
+    </React.Fragment>
+  ))}
+</tbody>
+
+
+
       </table>
     </>
   );
@@ -151,36 +159,44 @@ const UniversityTable = ({ data }) => {
         }}
       >
         <thead>
-          <tr style={{ background: "#2B3467", color: "white", height: "60px", borderBottom: "3px solid #000" }}>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "5%" }}>S.No</th>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "15%" }}>Name</th>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Semester</th>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 1</th>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 2</th>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Total Average</th>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Final Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row, index) => (
-            <React.Fragment key={index}>
-              <tr style={{ height: "50px", borderBottom: "3px solid #000" }}>
-                <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>{index + 1}</td>
-                <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>{row.name}</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>Odd</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.odd_paper1}</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.odd_paper2}</td>
-                <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>{row.total_average}</td>
-                <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>{row.final_score}</td>
-              </tr>
-              <tr style={{ height: "50px", borderBottom: "3px solid #000" }}>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>Even</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper1}</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper2}</td>
-              </tr>
-            </React.Fragment>
-          ))}
-        </tbody>
+  <tr style={{ background: "#2B3467", color: "white", height: "60px", borderBottom: "3px solid #000" }}>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "5%" }}>S.No</th>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "15%" }}>Name</th>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Semester</th>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 1</th>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 2</th>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Total Average</th>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Final Score</th>
+  </tr>
+  <tr style={{ background: "#2B3467", color: "white", height: "50px", borderBottom: "3px solid #000" }}>
+    {/* Empty row to match the structure */}
+  </tr>
+</thead>
+<tbody>
+  {data.map((row, index) => (
+    <React.Fragment key={index}>
+      {/* Odd Semester Row */}
+      <tr style={{ height: "50px", borderBottom: "3px solid #000" }}>
+        <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>{index + 1}</td>
+        <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>{row.staff_name}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>Odd</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.odd_paper?.[0] ?? "-"}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.odd_paper?.[1] ?? "-"}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.total_avg?.[0] ?? "-"}</td>
+        <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px", verticalAlign: "middle" }}>{row.total_univ}</td>
+      </tr>
+
+      {/* Even Semester Row */}
+      <tr style={{ height: "50px", borderBottom: "3px solid #000" }}>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>Even</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper?.[0] ?? "-"}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper?.[1] ?? "-"}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.total_avg?.[1] ?? "-"}</td>
+        <td style={{ border: "3px solid #000", padding: "15px" }}>{row.total_univ}</td>
+      </tr>
+    </React.Fragment>
+  ))}
+</tbody>
       </table>
     </>
   );
@@ -203,32 +219,40 @@ const FeedbackTable = ({ data }) => {
         }}
       >
         <thead>
-          <tr style={{ background: "#2B3467", color: "white", height: "60px", borderBottom: "3px solid #000" }}>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "5%" }}>S.No</th>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "15%" }}>Name</th>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Semester</th>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 1</th>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 2</th>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Total Average</th>
-            <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Final Score</th>
-          </tr>
-        </thead>
+  <tr style={{ background: "#2B3467", color: "white", height: "60px", borderBottom: "3px solid #000" }}>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "5%" }}>S.No</th>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "15%" }}>Name</th>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Semester</th>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 1</th>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "25%" }}>Paper 2</th>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Total Average</th>
+    <th rowSpan="2" style={{ border: "3px solid #000", padding: "15px", width: "10%" }}>Final Score</th>
+  </tr>
+  <tr style={{ background: "#2B3467", color: "white", height: "50px", borderBottom: "3px solid #000" }}>
+    {/* Empty row to match the structure */}
+  </tr>
+</thead>
         <tbody>
           {data.map((row, index) => (
             <React.Fragment key={index}>
+              {/* Odd Semester Row */}
               <tr style={{ height: "50px", borderBottom: "3px solid #000" }}>
                 <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>{index + 1}</td>
-                <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>{row.name}</td>
+                <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>{row.staff_name}</td>
                 <td style={{ border: "3px solid #000", padding: "15px" }}>Odd</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.odd_paper1}</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.odd_paper2}</td>
-                <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>{row.total_average}</td>
-                <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px" }}>{row.final_score}</td>
+                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.odd_paper?.[0] ?? "-"}</td>
+                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.odd_paper?.[1] ?? "-"}</td>
+                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.total_avg?.[0] ?? "-"}</td>
+                <td rowSpan="2" style={{ border: "3px solid #000", padding: "15px", verticalAlign: "middle" }}>{row.total_feed}</td>
               </tr>
+
+              {/* Even Semester Row */}
               <tr style={{ height: "50px", borderBottom: "3px solid #000" }}>
                 <td style={{ border: "3px solid #000", padding: "15px" }}>Even</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper1}</td>
-                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper2}</td>
+                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper?.[0] ?? "-"}</td>
+                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.even_paper?.[1] ?? "-"}</td>
+                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.total_avg?.[1] ?? "-"}</td>
+                <td style={{ border: "3px solid #000", padding: "15px" }}>{row.total_feed}</td>
               </tr>
             </React.Fragment>
           ))}
