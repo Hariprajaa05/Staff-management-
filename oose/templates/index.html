@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload & Calculate</title>
+    <style>
+        body {
+            background-color: #C2F2F2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        select, input, button {
+            margin: 10px;
+            padding: 8px;
+            width: 80%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: navy;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Upload & Calculate</h2>
+        <label> Choose your</label>
+        <select id="operation">
+            <option value="internal_assessment">Internal Assessment Marks</option>
+            <option value="university_marks">University Marks</option>
+            <option value="student_feedback">Student Feedback</option>
+
+        </select>
+        <input type="file" id="fileInput">
+        <button onclick="uploadFile()">Calculate</button>
+    </div>
+
+    <script>
+        function uploadFile() {
+            let file = document.getElementById("fileInput").files[0];
+            let operation = document.getElementById("operation").value;
+
+            if (!file) {
+                alert("Please select a file");
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("file", file);
+            formData.append("operation", operation);
+
+            fetch("/upload", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => alert(result))
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>
